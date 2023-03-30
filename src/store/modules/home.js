@@ -1,17 +1,31 @@
-import { observable,action,runInAction  } from 'mobx'
-import { getHomeGoodPriceData } from '@/services'
-
+import { observable, action, runInAction } from "mobx"
+import {
+  getHomeGoodPriceData,
+  getHomeHighScoreData,
+  getHomeDiscountData,
+} from "@/services"
 
 const home = observable({
   goodPriceInfo: {},
-  fetchData: action(async function(){
-    const res = await getHomeGoodPriceData()
-    runInAction(() => {
-      this.goodPriceInfo = res
+  highScoreInfo: {},
+  discountInfo: {},
+  fetchData: action(function () {
+    getHomeGoodPriceData().then(res => {
+      runInAction(() => {
+        this.goodPriceInfo = res
+      })
     })
-  })
-});
+    getHomeHighScoreData().then(res => {
+      runInAction(() => {
+        this.highScoreInfo = res
+      })
+    })
+    getHomeDiscountData().then(res => {
+      runInAction(() => {
+        this.discountInfo = res
+      })
+    })
+  }),
+})
 
-
-
-export default home;
+export default home

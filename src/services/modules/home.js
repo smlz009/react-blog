@@ -1,8 +1,19 @@
-import myRequest from '../request/index'
+import myRequest from "../request/index"
 
-export function getHomeGoodPriceData(data) {
-    return myRequest.get({
-        url:'/home/goodprice'
-    })
+export function getHomeGoodPriceData() {
+  return myRequest.get({
+    url: "/home/goodprice",
+  })
+}
 
+export function getHomeHighScoreData() {
+  return myRequest.get({
+    url: "/home/highscore",
+  })
+}
+
+export function getHomeDiscountData() {
+  return myRequest.get({
+    url: "/home/discount",
+  })
 }
