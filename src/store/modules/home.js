@@ -3,12 +3,14 @@ import {
   getHomeGoodPriceData,
   getHomeHighScoreData,
   getHomeDiscountData,
+  getHomeHotRecommendData,
 } from "@/services"
 
 const home = observable({
   goodPriceInfo: {},
   highScoreInfo: {},
   discountInfo: {},
+  homeHotRecommendInfo: {},
   fetchData: action(function () {
     getHomeGoodPriceData().then(res => {
       runInAction(() => {
@@ -23,6 +25,11 @@ const home = observable({
     getHomeDiscountData().then(res => {
       runInAction(() => {
         this.discountInfo = res
+      })
+    })
+    getHomeHotRecommendData().then(res => {
+      runInAction(() => {
+        this.homeHotRecommendInfo = res
       })
     })
   }),

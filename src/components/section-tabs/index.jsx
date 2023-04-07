@@ -2,6 +2,7 @@ import classNames from "classnames"
 import PropTypes from "prop-types"
 import React, { memo, useState } from "react"
 import TabsWrapper from "./style"
+import ScrpllView from "@/base-ui/scroll-view"
 
 const SectionTabs = memo(props => {
   const { tabNames = [], tabClick } = props
@@ -12,15 +13,17 @@ const SectionTabs = memo(props => {
   }
   return (
     <TabsWrapper>
-      {tabNames.map((item, index) => (
-        <div
-          className={classNames("item", { active: index === currentIndex })}
-          key={index}
-          onClick={e => itemClickHandler(index, item)}
-        >
-          {item}
-        </div>
-      ))}
+      <ScrpllView>
+        {tabNames.map((item, index) => (
+          <div
+            className={classNames("item", { active: index === currentIndex })}
+            key={index}
+            onClick={e => itemClickHandler(index, item)}
+          >
+            {item}
+          </div>
+        ))}
+      </ScrpllView>
     </TabsWrapper>
   )
 })
