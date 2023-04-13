@@ -4,7 +4,7 @@ const ItemWrapper = styled.div`
   width: ${props => props.itemWidth};
   padding: 8px;
   box-sizing: border-box;
-
+  flex-shrink: 0;
   .inner {
     width: 100%;
   }

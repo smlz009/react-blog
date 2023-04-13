@@ -5,6 +5,8 @@ import { HomeWrapper } from "./style"
 import HomeBanner from "./c-cpns/home-banner"
 import HomeSectionV1 from "./c-cpns/home-section-v1"
 import HomeSectionV2 from "./c-cpns/home-section-v2"
+import HomeLongfor from "./c-cpns/home-longfor"
+import HomeSectionV3 from "./c-cpns/home-section-v3"
 import { isEmptyObject } from "../../utils"
 
 const Home = observer(() => {
@@ -13,9 +15,14 @@ const Home = observer(() => {
     homeStore.fetchData()
   }, [])
   /** 从mobx中获取数据 */
-  const { goodPriceInfo, highScoreInfo, discountInfo, homeHotRecommendInfo } =
-    homeStore
-
+  const {
+    goodPriceInfo,
+    highScoreInfo,
+    discountInfo,
+    homeHotRecommendInfo,
+    longforInfo,
+    plusInfo,
+  } = homeStore
   return (
     <HomeWrapper>
       <HomeBanner />
@@ -31,6 +38,12 @@ const Home = observer(() => {
         )}
         {isEmptyObject(highScoreInfo) && (
           <HomeSectionV1 infoData={highScoreInfo}></HomeSectionV1>
+        )}
+        {isEmptyObject(longforInfo) && (
+          <HomeLongfor infoData={longforInfo}></HomeLongfor>
+        )}
+        {isEmptyObject(plusInfo) && (
+          <HomeSectionV3 infoData={plusInfo}></HomeSectionV3>
         )}
       </div>
     </HomeWrapper>
