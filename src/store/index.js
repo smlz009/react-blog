@@ -1,6 +1,4 @@
-import homeStore from "./modules/home";
+import homeStore from "./modules/home"
+import entireStore from "./modules/entire"
 
-
-export {
-    homeStore
-}
+export { homeStore, entireStore }
