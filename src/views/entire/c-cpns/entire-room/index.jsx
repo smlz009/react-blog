@@ -5,12 +5,16 @@ import { entireStore } from "@/store"
 import RoomItem from "@/components/room-item"
 
 const EntireRoom = observer(() => {
-  const { roomList } = entireStore
+  const { roomList, totalCount, isLoading } = entireStore
   return (
     <RoomWrapper>
-      {roomList.map((item, index) => (
-        <RoomItem itemData={item} itemWidth="20%" key={index}></RoomItem>
-      ))}
+      <h2 className="title">{totalCount}多处住宿</h2>
+      <div className="list">
+        {roomList.map(item => (
+          <RoomItem itemData={item} itemWidth="20%" key={item._id}></RoomItem>
+        ))}
+      </div>
+      {isLoading && <div className="cover"></div>}
     </RoomWrapper>
   )
 })
