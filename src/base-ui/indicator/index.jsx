@@ -9,7 +9,6 @@ const Indicator = memo(props => {
   useEffect(() => {
     // 1.获取selectIndex对应的item
     const selectItemEl = contentRef.current.children[selectIndex]
-    console.log(selectItemEl)
     const itemLeft = selectItemEl.offsetLeft
     const itemWidth = selectItemEl.clientWidth
     // 2.content的宽度

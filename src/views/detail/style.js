@@ -1,9 +1,5 @@
 import styled from "styled-components"
 
-const DetailWrapper = styled.div`
-  .list {
-    width: 100px;
-  }
-`
+const DetailWrapper = styled.div``
 
 export default DetailWrapper

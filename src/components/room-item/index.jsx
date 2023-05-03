@@ -10,11 +10,10 @@ import Indicator from "@/base-ui/indicator"
 import classNames from "classnames"
 
 const RoomItem = memo(props => {
-  const { itemData = {}, itemWidth = "25%" } = props
+  const { itemData = {}, itemWidth = "25%", itemClick } = props
   const [selectIndex, setSelectIndex] = useState(0)
   const sliderRef = useRef()
   const controlBtnHandle = (isRight = true) => {
-    console.log(sliderRef.current)
     isRight ? sliderRef.current.slickNext() : sliderRef.current.slickPrev()
 
     // 最新的索引
@@ -25,46 +24,61 @@ const RoomItem = memo(props => {
     setSelectIndex(newIndex)
   }
 
+  const handelItemClick = () => {
+    itemClick && itemClick()
+  }
+
+  const pictureElemnt = (
+    <div className="cover">
+      <img src={itemData.picture_url} alt="" />
+    </div>
+  )
+
+  const swiperElemnt = (
+    <div className="swiper">
+      <div className="control">
+        <div className="btn left" onClick={e => controlBtnHandle(false)}>
+          <IconArrowLeft width="30" height="30" />
+        </div>
+        <div className="btn right" onClick={e => controlBtnHandle(true)}>
+          <IconArrowRight width="30" height="30" />
+        </div>
+      </div>
+      <div className="indicator">
+        <Indicator selectIndex={selectIndex}>
+          {itemData?.picture_urls?.map((item, index) => {
+            return (
+              <div className="item" key={item}>
+                <span
+                  className={classNames("dot", {
+                    active: selectIndex === index,
+                  })}
+                ></span>
+              </div>
+            )
+          })}
+        </Indicator>
+      </div>
+      <Slider ref={sliderRef}>
+        {itemData?.picture_urls?.map(item => {
+          return (
+            <div className="cover" key={item}>
+              <img src={item} alt="" />
+            </div>
+          )
+        })}
+      </Slider>
+    </div>
+  )
+
   return (
     <ItemWrapper
       verifyColor={itemData.verify_info?.textColor || "#395769"}
       itemWidth={itemWidth}
     >
-      <div className="inner">
-        <div className="swiper">
-          <div className="control">
-            <div className="btn left" onClick={e => controlBtnHandle(false)}>
-              <IconArrowLeft width="30" height="30" />
-            </div>
-            <div className="btn right" onClick={e => controlBtnHandle(true)}>
-              <IconArrowRight width="30" height="30" />
-            </div>
-          </div>
-          <div className="indicator">
-            <Indicator selectIndex={selectIndex}>
-              {itemData?.picture_urls?.map((item, index) => {
-                return (
-                  <div className="item" key={item}>
-                    <span
-                      className={classNames("dot", {
-                        active: selectIndex === index,
-                      })}
-                    ></span>
-                  </div>
-                )
-              })}
-            </Indicator>
-          </div>
-          <Slider ref={sliderRef}>
-            {itemData?.picture_urls?.map(item => {
-              return (
-                <div className="cover" key={item}>
-                  <img src={item} alt="" />
-                </div>
-              )
-            })}
-          </Slider>
-        </div>
+      <div className="inner" onClick={handelItemClick}>
+        {itemData.picture_urls ? swiperElemnt : pictureElemnt}
+
         <div className="desc">{itemData.verify_info.messages.join(" · ")}</div>
         <div className="name">{itemData.name}</div>
         <div className="price">¥{itemData.price}/晚</div>
